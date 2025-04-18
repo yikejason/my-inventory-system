@@ -23,10 +23,22 @@ export default [
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
+    path: '/product-manage',
+    name: '商品管理',
+    icon: 'product',
+    component: './product-manage/index',
+  },
+  {
+    path: '/outbound-manage',
+    name: '出库',
+    icon: 'upload',
+    component: './outbound-manage/index',
+  },
+  {
+    path: '/warehouse-manage',
+    name: '入库',
+    icon: 'download',
+    component: './warehouse-manage/index',
   },
   {
     path: '/admin',
@@ -46,14 +58,8 @@ export default [
     ],
   },
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
-  {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/outbound-manage',
   },
   {
     path: '*',
