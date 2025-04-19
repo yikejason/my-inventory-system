@@ -1,11 +1,13 @@
 import { rule } from '@/services/ant-design-pro/api';
-import { PlusOutlined } from '@ant-design/icons';
+import { CloudDownloadOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import Create from './components/create';
 
 const OutboundManage = () => {
+  const [visible, setVisible] = useState(false);
   const actionRef = useRef<ActionType>();
 
   const columns: ProColumns<API.RuleListItem>[] = [
@@ -40,6 +42,14 @@ const OutboundManage = () => {
     },
   ];
 
+  const handleCreateOutbound = () => {
+    setVisible(true);
+  };
+
+  const handleClose = () => {
+    setVisible(false);
+  };
+
   return (
     <PageContainer>
       <ProTable<API.RuleListItem, API.PageParams>
@@ -50,16 +60,17 @@ const OutboundManage = () => {
           labelWidth: 120,
         }}
         toolBarRender={() => [
-          <Button type="primary" key="primary">
+          <Button type="primary" key="primary" onClick={handleCreateOutbound}>
             <PlusOutlined /> 新增出库
           </Button>,
-          <Button type="primary" key="primary">
-            <PlusOutlined /> 导出出库流水
+          <Button key="primary">
+            <CloudDownloadOutlined /> 导出出库流水
           </Button>,
         ]}
         request={rule}
         columns={columns}
       />
+      <Create title="新增出库" visible={visible} onClose={handleClose} />
     </PageContainer>
   );
 };

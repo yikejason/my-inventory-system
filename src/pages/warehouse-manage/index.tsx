@@ -53,7 +53,7 @@ const WareHouseManageManage = () => {
           <Button type="primary" key="primary">
             <PlusOutlined /> 新增入库
           </Button>,
-          <Button type="primary" key="primary">
+          <Button key="primary">
             <PlusOutlined /> 导出出库流水
           </Button>,
         ]}
