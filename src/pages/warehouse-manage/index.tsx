@@ -3,9 +3,11 @@ import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button } from 'antd';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import Create from './components/create';
 
 const WareHouseManageManage = () => {
+  const [visible, setVisible] = useState(false);
   const actionRef = useRef<ActionType>();
 
   const columns: ProColumns<API.RuleListItem>[] = [
@@ -40,6 +42,14 @@ const WareHouseManageManage = () => {
     },
   ];
 
+  const handleCreateWarehouse = () => {
+    setVisible(true);
+  };
+
+  const handleClose = () => {
+    setVisible(false);
+  };
+
   return (
     <PageContainer>
       <ProTable<API.RuleListItem, API.PageParams>
@@ -50,7 +60,7 @@ const WareHouseManageManage = () => {
           labelWidth: 120,
         }}
         toolBarRender={() => [
-          <Button type="primary" key="primary">
+          <Button type="primary" key="primary" onClick={handleCreateWarehouse}>
             <PlusOutlined /> 新增入库
           </Button>,
           <Button key="primary">
@@ -60,6 +70,8 @@ const WareHouseManageManage = () => {
         request={rule}
         columns={columns}
       />
+      {/* create a add product drawer */}
+      <Create title="新增入库" visible={visible} onClose={handleClose} />
     </PageContainer>
   );
 };
